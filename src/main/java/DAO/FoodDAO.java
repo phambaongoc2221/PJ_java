@@ -63,9 +63,37 @@ public class FoodDAO {
         return null;
     }
 
-    public static void main(String[] args) {
-        FoodDAO fD = new FoodDAO();
-        fD.getFoodByID("2");
-        System.out.println(fD);
+    public static List<Food> getFoodByName(String txtSearch) {
+        List<Food> list = new ArrayList<Food>();
+
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("select * from food where name like ?");
+            ps.setString(1, "%" + txtSearch +"%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Food food = new Food();
+                food.setId(rs.getInt("id"));
+                food.setName(rs.getString("name"));
+                food.setImage(rs.getString("image"));
+                food.setPrice(rs.getFloat("price"));
+                food.setScript(rs.getString("script"));
+                list.add(food);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
     }
+
+    public static void main(String[] args) {
+        FoodDAO dao = new FoodDAO();
+        List<Food> list = dao.getFoodByName("Bánh");
+        for(Food food : list){
+            System.out.println(food);
+        }
+    }
+
+
+
 }
