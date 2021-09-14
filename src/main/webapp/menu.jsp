@@ -49,8 +49,8 @@
 
       </ul>
       <form class="d-flex" method="get" action="/search">
-        <input name="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button type="submit" value="Submit">Submit</button>
+        <input name="txt" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-success" >Search</button>
         <div class="btn-group ms-3">
           <button id="cart" type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             <svg style="margin-bottom: 4px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
