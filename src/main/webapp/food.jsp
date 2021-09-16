@@ -13,100 +13,28 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"crossorigin="anonymous">
-
+  <link rel="stylesheet" href="../style.css">
   <title>VNFood</title>
 
 </head>
 <body>
+
 <style>
-
   .card-img-top{
-    height: 400px;
-    weight: 700px
-  }
-  .nav-item:hover{
-    background-color:cornflowerblue;
-  }
-  @media (min-width:980px) and (max-width:1024px) {
-    .nav-link{
-      height: 100%;
-    }
-  }
-  .hotline-phone-ring-wrap {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 999999;
-  }
-
-  .hotline-bar {
-    position: absolute;
-    background: rgba(230, 8, 8, 0.75);
-    height: 40px;
-    width: 180px;
-    line-height: 40px;
-    border-radius: 3px;
-    padding: 0 10px;
-    background-size: 100%;
-    cursor: pointer;
-    z-index: 9;
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.1);
-    left: 33px;
-    bottom: 37px;
-  }
-  .hotline-bar > a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: bold;
-    text-indent: 50px;
-    display: block;
-    letter-spacing: 1px;
-    line-height: 40px;
-    font-family: Arial;
+    height: 350px;
+    weight: 800px
   }
 </style>
 
 <header>
   <jsp:include page="menu.jsp"></jsp:include>
-  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">Món ăn truyền thống Việt Nam qua các vùng miền</h1>
+      <p class="lead text-muted mb-0">Nét đặc trưng riêng của ẩm thực Việt Nam</p>
     </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="https://www.chupsanpham.net/wp-content/uploads/2014/02/chup-anh-san-pham-mon-an-3-1-900x600.jpg" class="d-block w-100" alt="..." style="height: 450px">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>First slide label</h5>
-          <p>Some representative placeholder content for the first slide.</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="https://bestlifetips.net/wp-content/uploads/2021/07/banh-xeo-mien-bac-e1439303619944.jpg" class="d-block w-100" alt="..." style="height: 450px;">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Second slide label</h5>
-          <p>Some representative placeholder content for the second slide.</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="https://phuotvivu.com/blog/wp-content/uploads/2018/08/nha-hang-viet-nam-mon-an-viet-singapore.jpg" class="d-block w-100" alt="..."  style="height: 450px;">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Third slide label</h5>
-          <p>Some representative placeholder content for the third slide.</p>
-        </div>
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
+  </section>
+  <!--end of menu-->
 </header>
 
 <main>
