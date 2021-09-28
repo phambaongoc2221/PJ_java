@@ -1,6 +1,7 @@
 package Control;
 
 import DAO.FoodDAO;
+import Entity.Category;
 import Entity.Food;
 
 import javax.servlet.ServletException;
@@ -18,7 +19,9 @@ public class FoodControl extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         FoodDAO foodDAO = new FoodDAO();
         List<Food> list = foodDAO.getAllFood();
+        List<Category> listC = foodDAO.getAllCategory();
         request.setAttribute("list", list);
+        request.setAttribute("listC", listC);
         request.getRequestDispatcher("food.jsp").forward(request, response);
     }
 

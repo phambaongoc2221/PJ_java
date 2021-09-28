@@ -1,6 +1,7 @@
 package DAO;
 
 import Entity.Account;
+import Entity.Category;
 import Entity.Food;
 
 import java.sql.Connection;
@@ -42,6 +43,49 @@ public class FoodDAO {
             System.out.println(e);
         }
         return list;
+    }
+
+    public static List<Category> getAllCategory() {
+        List<Category> list = new ArrayList<Category>();
+
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("select * from category");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Category category = new Category();
+                category.setcID(rs.getInt("cID"));
+                category.setCname(rs.getString("cname"));
+                list.add(category);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public static List<Food> getAllCategoryByID(String cID) {
+        List<Food> list = new ArrayList<Food>();
+
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("select * from food where cid=?");
+            ps.setString(1, cID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Food food = new Food();
+                food.setId(rs.getInt("id"));
+                food.setName(rs.getString("name"));
+                food.setImage(rs.getString("image"));
+                food.setPrice(rs.getFloat("price"));
+                food.setScript(rs.getString("script"));
+                list.add(food);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+
     }
 
 
@@ -161,4 +205,48 @@ public class FoodDAO {
         }
         return list;
     }
+
+    public void deleteFoodByID(String id) {
+        try{
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("DELETE FROM food WHERE id = ?");
+            ps.setString(1, id);
+            ps.executeUpdate();
+        }catch (Exception e){
+
+        }
+    }
+
+    public void insertFood(String name, String image, String price, String script, String cID, int uID){
+        try{
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("INSERT INTO food (name, image, price, script, cID, uID) VALUES (?,?,?,?,?,?)");
+            ps.setString(1, name);
+            ps.setString(2, image);
+            ps.setString(3, price);
+            ps.setString(4, script);
+            ps.setString(5, cID);
+            ps.setInt(6, uID);
+            ps.executeUpdate();
+        }catch (Exception e){
+
+        }
+    }
+
+    public void editFood(String name, String image, String price, String script, String cID, String id){
+        try{
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("UPDATE food SET name=?, image=?, price=?, script=?, cID=? WHERE id=?");
+            ps.setString(1, name);
+            ps.setString(2, image);
+            ps.setString(3, price);
+            ps.setString(4, script);
+            ps.setString(5, cID);
+            ps.setString(6, id);
+            ps.executeUpdate();
+        }catch (Exception e){
+
+        }
+    }
+
 }

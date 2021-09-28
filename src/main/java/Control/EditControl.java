@@ -2,8 +2,6 @@ package Control;
 
 import DAO.FoodDAO;
 import Entity.Account;
-import Entity.Category;
-import Entity.Food;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,22 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet(name = "ManagerControl", urlPatterns = {"/managerP"})
-public class ManagerControl extends HttpServlet {
+@WebServlet(name = "EditControl", urlPatterns = {"/edit"})
+public class EditControl extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        Account account = (Account) session.getAttribute("acc");
-        int uID = account.getuID();
+        request.setCharacterEncoding("UTF-8");
+        String id = request.getParameter("id");
+        String name = request.getParameter("name");
+        String image = request.getParameter("image");
+        String price = request.getParameter("price");
+        String script = request.getParameter("script");
+        String cID = request.getParameter("cID");
         FoodDAO dao = new FoodDAO();
-        List<Food> list = dao.getFoodBySellID(uID);
-        List<Category> listC = dao.getAllCategory();
-        request.setAttribute("listC", listC);
-        request.setAttribute("listF",list);
-        request.getRequestDispatcher("ManagerProduct.jsp").forward(request,response);
+        dao.editFood(name,image,price,script,cID,id);
+        response.sendRedirect("managerP");
 
     }
 
@@ -48,3 +46,4 @@ public class ManagerControl extends HttpServlet {
         return "Short description";
     }
 }
+

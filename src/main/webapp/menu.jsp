@@ -33,13 +33,9 @@
             Danh mục
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-            <li><a class="dropdown-item" href="#">Do Uong</a></li>
-            <li><a class="dropdown-item" href="#">Do An</a></li>
-            <li><a class="dropdown-item" href="#"> Do Choi</a></li>
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <c:forEach items="${listC}" var="o">
+              <li><a class="dropdown-item" href="category?cid=${o.cID}">${o.cname}</a></li>
+            </c:forEach>
           </ul>
         </li>
         <c:if test="${sessionScope.acc != null}">

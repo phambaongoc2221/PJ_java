@@ -28,6 +28,7 @@
         }
     </style>
 <body>
+
 <div class="container">
     <div class="table-wrapper">
         <div class="table-title">
@@ -73,8 +74,8 @@
                     </td>
                     <td>${o.price}</td>
                     <td>
-                        <a href="#editEmployeeModal"  class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                        <a href="load?id=${o.id}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                        <a href="delete?id=${o.id}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                     </td>
                 </tr>
             </c:forEach>
@@ -96,41 +97,37 @@
     <a href="#"><button type="button" class="btn btn-primary">Back to home</button>
 
 </div>
-<!-- Edit Modal HTML -->
+
 <div id="addEmployeeModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="add" method="post">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add Product</h4>
+                    <h4 class="modal-title">Thêm món ăn</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Name</label>
+                        <label>Tên món ăn</label>
                         <input name="name" type="text" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>Image</label>
+                        <label>Hình ảnh</label>
                         <input name="image" type="text" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>Price</label>
+                        <label>Giá tiền</label>
                         <input name="price" type="text" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>Title</label>
-                        <textarea name="title" class="form-control" required></textarea>
+                        <label>Mô tả</label>
+                        <textarea name="script" class="form-control" required></textarea>
                     </div>
                     <div class="form-group">
-                        <label>Description</label>
-                        <textarea name="description" class="form-control" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Category</label>
+                        <label>Danh mục</label>
                         <select name="category" class="form-select" aria-label="Default select example">
-                            <c:forEach begin="1" end="3" var="o">
-                                <option value="1">Giày Adidas</option>
+                            <c:forEach items="${listC}" var="o">
+                                <option value="${o.cID}">${o.cname}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -144,31 +141,31 @@
         </div>
     </div>
 </div>
-<!-- Edit Modal HTML -->
-<div id="editEmployeeModal" class="modal fade">
+
+<div id="editModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form>
+            <form action="load" method="post">
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit Employee</h4>
+                    <h4 class="modal-title">Chỉnh sửa</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" class="form-control" required>
+                        <label>Tên món ăn</label>
+                        <input value="${detail.name}" type="text" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" class="form-control" required>
+                        <label>Hình ảnh</label>
+                        <input value="${detail.image}" type="email" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>Address</label>
-                        <textarea class="form-control" required></textarea>
+                        <label>Giá tiền</label>
+                        <input value="${detail.price}" type="email" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>Phone</label>
-                        <input type="text" class="form-control" required>
+                        <label>Mô tả</label>
+                        <textarea class="form-control" required>${detail.script}</textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -200,7 +197,6 @@
         </div>
     </div>
 </div>
-
 
 </body>
 </html>
