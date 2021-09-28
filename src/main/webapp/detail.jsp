@@ -233,6 +233,15 @@
     color: #333;
     font-size: 1.1em;
   }
+  @media only screen and (min-width:540px ) and (max-width: 990px){
+    .detail-div{
+      display: flex;
+      flex-direction: column;
+    }
+    .detail-content{
+      text-align: justify;
+    }
+  }
 </style>
 <header>
   <jsp:include page="menu.jsp"></jsp:include>
@@ -241,7 +250,7 @@
 
   <div>
 
-    <div class="row  mt-3">
+    <div class="row detail-div mt-3">
       <div class="col-sm-5 order-sm-1 order-2">
         <img id="img" class="img-prd" src="${detail.image}" >
       </div>
@@ -263,9 +272,9 @@
     </div>
   </div>
   <div style="margin-top: 30px;color: red;">
-    <p>  Giới thiệu món ăn ----------------------------------------------------------------------------------------------------------------</p>
+    <p style="font-size: 40px">  Giới thiệu món ăn  </p><hr>
   </div>
-  <div>${detail.script}</div>
+  <div class="detail-content">${detail.script}</div>
 </main>
 <jsp:include page="footer.jsp"></jsp:include>
 </body>

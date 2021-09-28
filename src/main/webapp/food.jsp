@@ -24,6 +24,22 @@
     height: 350px;
     weight: 800px
   }
+  @media only screen and (min-width: 400px) and (max-width:990px){
+    .all-button{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin: auto;
+    }
+    .button-1{
+      margin-left: 13px;
+      margin-bottom: 10px;
+    }
+
+  }
+
+
 </style>
 
 <header>
@@ -45,16 +61,16 @@
       <c:forEach items="${list}" var="o">
       <div class="col">
         <div class="card p-0">
-          <div class="card-img-top"><img style="height: 100%;width: 100%;" src="${o.image}" alt=""></div>
+          <div class="card-img-top"><a href="detail?id=${o.id}"> <img style="height: 100%;width: 100%;" src="${o.image}"></a></div>
           <div class="card-body ">
             <div style="text-align: center;" >
               <h4 class="card-title show_txt"> </h4>
               <h3 class="card-text food-title" style="color:green;"><a href="detail?id=${o.id}" title="View Food">${o.name}</a></h3>
               <p style="font-size: 20px; color: red;" class="money">${o.price} VNĐ</p>
             </div>
-            <div  style="margin-top: 20px;"><hr>
-              <button  type="button" class="btn btn-success btn-cart" style="margin-right: 15px;min-width: 100px;">Add To Cart</button>
-              <button  type="button" class="btn btn-success" style="float: right;min-width: 100px;">Order</button>
+            <div class="all-button" style="margin-top: 20px;"><hr>
+              <button  type="button" class="btn button-1 btn-success btn-cart" style="margin-right: 15px;min-width: 100px;">Add To Cart</button>
+              <button  type="button" class="btn  btn-success" style="float: right;min-width: 100px;">Order</button>
             </div>
           </div>
         </div>

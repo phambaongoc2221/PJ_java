@@ -1,5 +1,6 @@
 package DAO;
 
+import Entity.Account;
 import Entity.Food;
 
 import java.sql.Connection;
@@ -20,6 +21,7 @@ public class FoodDAO {
         }
         return con;
     }
+
     public static List<Food> getAllFood() {
         List<Food> list = new ArrayList<Food>();
 
@@ -51,11 +53,11 @@ public class FoodDAO {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 return new Food(
-                            rs.getInt(1),
-                            rs.getString(2),
-                            rs.getString(3),
-                            rs.getFloat(4),
-                            rs.getString(5));
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getFloat(4),
+                        rs.getString(5));
             }
         } catch (Exception e) {
 
@@ -69,7 +71,7 @@ public class FoodDAO {
         try {
             Connection con = getConnection();
             PreparedStatement ps = con.prepareStatement("select * from food where name like ?");
-            ps.setString(1, "%" + txtSearch +"%");
+            ps.setString(1, "%" + txtSearch + "%");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Food food = new Food();
@@ -86,14 +88,77 @@ public class FoodDAO {
         return list;
     }
 
-    public static void main(String[] args) {
-        FoodDAO dao = new FoodDAO();
-        List<Food> list = dao.getFoodByName("Bánh");
-        for(Food food : list){
-            System.out.println(food);
+    public Account login(String username, String password) {
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT*FROM account WHERE username=? AND password=?");
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return new Account(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getInt(5));
+            }
+        } catch (Exception e) {
+
+        }
+        return null;
+    }
+
+    public Account checkAccount(String username) {
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT*FROM account WHERE username=?");
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return new Account(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getInt(5));
+            }
+        } catch (Exception e) {
+
+        }
+        return null;
+    }
+
+    public void signup(String username, String password) {
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("INSERT INTO account (username, password, isSell, isAdmin) VALUES (?, ?, 0, 0);");
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ps.executeUpdate();
+        } catch (Exception e) {
+
         }
     }
 
+    public static List<Food> getFoodBySellID(int uID) {
+        List<Food> list = new ArrayList<Food>();
 
-
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT*FROM food where uID=?");
+            ps.setInt(1,uID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Food food = new Food();
+                food.setId(rs.getInt("id"));
+                food.setName(rs.getString("name"));
+                food.setImage(rs.getString("image"));
+                food.setPrice(rs.getFloat("price"));
+                food.setScript(rs.getString("script"));
+                list.add(food);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
 }

@@ -122,7 +122,7 @@
     width: 100%;
     height: auto;
     padding: 50px 100px;
-    background: #111;
+    background: gray;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;

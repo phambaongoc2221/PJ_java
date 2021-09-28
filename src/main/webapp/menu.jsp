@@ -23,14 +23,14 @@
     <div class="collapse navbar-collapse" id="navbarScroll">
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
         <li class="nav-item" style="line-height: 80px;">
-          <a class="nav-link active"  href="#">Trang Chu</a>
+          <a class="nav-link active"  href="/">Trang chủ</a>
         </li>
         <li class="nav-item" style="line-height: 80px;">
-          <a class="nav-link" href="#">Ve Chung Toi</a>
+          <a class="nav-link" href="#">Về chúng tôi</a>
         </li>
         <li class="nav-item dropdown" style="line-height: 80px;">
           <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-            Danh Muc
+            Danh mục
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
             <li><a class="dropdown-item" href="#">Do Uong</a></li>
@@ -42,20 +42,38 @@
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
         </li>
-        <li class="nav-item"style="line-height: 80px;">
-          <a class="nav-link" href="#">Lien He</a>
-        </li>
+        <c:if test="${sessionScope.acc != null}">
+          <li class="nav-item dropdown" style="line-height: 80px;">
+            <a class="nav-link dropdown-toggle" href="#" style="font-family: Arial Rounded MT Bold; font-size: 20px" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+              Xin chào ${sessionScope.acc.username}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+              <li><a class="dropdown-item" href="#">Trang cá nhân</a></li>
+              <li><a class="dropdown-item" href="#">Thiết lập tài khoản</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <c:if test="${sessionScope.acc.isAdmin == 1}">
+                <li><a class="dropdown-item" href="#">Quản lý người dùng</a></li>
+              </c:if>
+              <c:if test="${sessionScope.acc.isSell == 1}">
+                <li><a class="dropdown-item" href="managerP">Quản lý sản phẩm</a></li>
+              </c:if>
+            </ul>
+          </li>
+        </c:if>
+
+
+
 
 
       </ul>
       <form class="d-flex" method="get" action="/search">
-        <input name="txt" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-success" >Search</button>
+        <input name="txt" class="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
+        <button class="btn btn-success" >Tìm</button>
         <div class="btn-group ms-3">
           <button id="cart" type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             <svg style="margin-bottom: 4px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
               <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-            </svg>  Gio Hang
+            </svg>  Giỏ hàng
           </button>
           <div id="myModal" class="modal">
             <div class="modal-content">
@@ -106,7 +124,12 @@
             </div>
           </div>
         </div>
-        <button id="login" type="button" class="guest btn btn-primary ms-3" data-bs-toggle="modal" data-bs-target="#modal-login"><span >Login</span></button>
+        <c:if test="${sessionScope.acc == null}">
+          <button id="login" type="button" style="background-color: lightcoral" ><span ><a href="login.jsp">Login</a></span></button>
+        </c:if>
+        <c:if test="${sessionScope.acc != null}">
+          <button id="logout" type="button" style="background-color: lightcoral" ><span ><a href="/logout">Logout</a></span></button>
+        </c:if>
       </form>
     </div>
   </div>
