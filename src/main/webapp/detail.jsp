@@ -7,7 +7,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Food Detail</title>
-
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
@@ -242,6 +245,33 @@
       text-align: justify;
     }
   }
+  .dot {
+    height: 6px;
+    width: 6px;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-top: 2px;
+    background-color: rgb(91, 92, 91);
+    border-radius: 50%;
+    display: inline-block
+  }
+
+  .name {
+    font-size: 14px
+  }
+
+  .date {
+    font-size: 12px
+  }
+
+  .rating i {
+    color: gold;
+    font-size: 13px
+  }
+
+  .comment-text {
+    font-size: 12px
+  }
 </style>
 <header>
   <jsp:include page="menu.jsp"></jsp:include>
@@ -266,7 +296,6 @@
         <div id="button" style="margin-top: 20px;"><hr>
           <button id="btn-add-cart" type="button" class="btn btn-success btn-cart" style="margin-right: 15px;">Add To Cart</button>
           <button id="btn-order" type="button" class="btn btn-success">Order</button>
-
         </div>
       </div>
     </div>
@@ -275,6 +304,24 @@
     <p style="font-size: 40px">  Giới thiệu món ăn  </p><hr>
   </div>
   <div class="detail-content">${detail.script}</div>
+<hr>
+  <div class="container mt-5">
+    <div class="p-3 bg-white rounded">
+      <h6>Reviews</h6>
+      <div class="review mt-4">
+        <c:forEach items="${cmt}" var="a">
+          <div class="d-flex flex-row comment-user"><img class="rounded" src="https://cdn-icons-png.flaticon.com/512/1159/1159740.png" width="40">
+            <div class="ml-2">
+              <div class="d-flex flex-row align-items-center"><span class="name font-weight-bold">${a.username}</span><span class="dot"></span><span class="date">12 Aug 2020</span></div>
+            </div>
+          </div>
+          <div class="mt-2">
+            <p class="comment-text">${a.comment}</p>
+          </div>
+        </c:forEach>
+      </div>
+    </div>
+  </div>
 </main>
 <jsp:include page="footer.jsp"></jsp:include>
 </body>

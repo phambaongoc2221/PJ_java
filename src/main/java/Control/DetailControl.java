@@ -1,6 +1,7 @@
 package Control;
 
 import DAO.FoodDAO;
+import Entity.Comment;
 import Entity.Food;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "DetailControl", urlPatterns = {"/detail"})
 public class DetailControl extends HttpServlet {
@@ -18,7 +20,9 @@ public class DetailControl extends HttpServlet {
         String id = request.getParameter("id");
         FoodDAO dao = new FoodDAO();
         Food food = dao.getFoodByID(id);
+        List<Comment> list = dao.getAllComment(id);
         request.setAttribute("detail", food);
+        request.setAttribute("cmt",list);
         request.getRequestDispatcher("detail.jsp").forward(request,response);
 
     }

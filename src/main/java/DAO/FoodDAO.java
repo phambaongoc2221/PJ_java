@@ -2,6 +2,7 @@ package DAO;
 
 import Entity.Account;
 import Entity.Category;
+import Entity.Comment;
 import Entity.Food;
 
 import java.sql.Connection;
@@ -247,6 +248,31 @@ public class FoodDAO {
         }catch (Exception e){
 
         }
+    }
+
+    public static List<Comment> getAllComment(String id) {
+        List<Comment> list = new ArrayList<Comment>();
+
+        try {
+            Connection con = getConnection();
+            PreparedStatement ps = con.prepareStatement("select cmtID,id, comment.uID, comment, star, username from comment, account where comment.uID = account.uID  and id=?");
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Comment comment = new Comment();
+                comment.setCmtID(rs.getInt("cmtID"));
+                comment.setId(rs.getInt("id"));
+                comment.setuID(rs.getInt("uID"));
+                comment.setUsername(rs.getString("username"));
+                comment.setComment(rs.getString("comment"));
+                comment.setStar(rs.getInt("star"));
+                list.add(comment);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+
     }
 
 }
