@@ -1,7 +1,7 @@
 package Control;
 
 import DAO.FoodDAO;
-import Entity.Comment;
+import Entity.Account;
 import Entity.Food;
 
 import javax.servlet.ServletException;
@@ -11,24 +11,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet(name = "DetailControl", urlPatterns = {"/detail"})
-public class DetailControl extends HttpServlet {
+@WebServlet(name = "AddComment", urlPatterns = {"/addComment"})
+public class AddComment extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String id = request.getParameter("id");
-        FoodDAO dao = new FoodDAO();
-        Food food = dao.getFoodByID(id);
-        List<Comment> list = dao.getAllComment(id);
-        request.setAttribute("detail", food);
-        request.setAttribute("cmt",list);
+        request.setCharacterEncoding("UTF-8");
+        String comment = request.getParameter("comment");
         HttpSession session = request.getSession();
-        session.setAttribute("f",food);
-        request.getRequestDispatcher("detail.jsp").forward(request,response);
+        Account account = (Account) session.getAttribute("acc");
+        Food food = (Food) session.getAttribute("f");
+        int uID = account.getuID();
+        int id = food.getId();
+
+
+        FoodDAO dao = new FoodDAO();
+        dao.insertComment(id, uID, comment);
+        request.getRequestDispatcher("/detail").forward(request,response);
 
     }
+
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
